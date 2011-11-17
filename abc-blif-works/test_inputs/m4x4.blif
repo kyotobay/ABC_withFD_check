@@ -1,0 +1,277 @@
+# Benchmark "mult" written by ABC on Tue Jul 19 10:49:31 2011
+.model mult
+.inputs mult_a_0 mult_a_1 mult_a_2 mult_a_3 mult_b_0 mult_b_1 mult_b_2 mult_b_3
+.outputs mult_z_0 mult_z_1 mult_z_2 mult_z_3 mult_z_4 mult_z_5 mult_z_6 mult_z_7
+.names mult_a_0 mult_b_0 mult_z_0
+11 1
+.names mult_a_1 mult_b_0 n17
+11 1
+.names mult_a_0 mult_b_1 n18
+11 1
+.names n17 n18 n19
+10 1
+.names n17 n18 n20
+01 1
+.names n19 n20 mult_z_1
+00 1
+.names mult_a_2 mult_b_0 n22
+11 1
+.names mult_a_1 mult_b_1 n23
+11 1
+.names n17 n18 n24
+11 1
+.names n23 n24 n25
+11 1
+.names n23 n24 n26
+00 1
+.names n25 n26 n27
+00 1
+.names n22 n27 n28
+10 1
+.names n23 n24 n29
+01 1
+.names n23 n24 n30
+10 1
+.names n29 n30 n31
+00 1
+.names n22 n31 n32
+00 1
+.names n28 n32 n33
+00 1
+.names mult_a_0 mult_b_2 n34
+11 1
+.names n33 n34 n35
+00 1
+.names n33 n34 n36
+11 1
+.names n35 n36 mult_z_2
+00 1
+.names mult_a_3 mult_b_0 n38
+11 1
+.names mult_a_2 mult_b_1 n39
+11 1
+.names n23 n29 n40
+00 1
+.names n22 n40 n41
+10 1
+.names n22 n25 n42
+01 1
+.names n41 n42 n43
+00 1
+.names n39 n43 n44
+10 1
+.names n39 n43 n45
+01 1
+.names n44 n45 n46
+00 1
+.names n38 n46 n47
+10 1
+.names n39 n43 n48
+00 1
+.names n39 n43 n49
+11 1
+.names n48 n49 n50
+00 1
+.names n38 n50 n51
+00 1
+.names n47 n51 n52
+00 1
+.names mult_a_1 mult_b_2 n53
+11 1
+.names n33 n34 n54
+01 1
+.names n53 n54 n55
+11 1
+.names n53 n54 n56
+00 1
+.names n55 n56 n57
+00 1
+.names n52 n57 n58
+00 1
+.names n53 n54 n59
+01 1
+.names n53 n54 n60
+10 1
+.names n59 n60 n61
+00 1
+.names n52 n61 n62
+10 1
+.names n58 n62 n63
+00 1
+.names mult_a_0 mult_b_3 n64
+11 1
+.names n63 n64 n65
+00 1
+.names n63 n64 n66
+11 1
+.names n65 n66 mult_z_3
+00 1
+.names mult_a_3 mult_b_1 n68
+11 1
+.names n39 n48 n69
+00 1
+.names n38 n69 n70
+10 1
+.names n38 n44 n71
+01 1
+.names n70 n71 n72
+00 1
+.names n68 n72 n73
+10 1
+.names n68 n72 n74
+00 1
+.names n68 n72 n75
+11 1
+.names n74 n75 n76
+00 1
+.names mult_a_2 mult_b_2 n77
+11 1
+.names n53 n59 n78
+00 1
+.names n52 n78 n79
+00 1
+.names n52 n55 n80
+11 1
+.names n79 n80 n81
+00 1
+.names n77 n81 n82
+10 1
+.names n77 n81 n83
+01 1
+.names n82 n83 n84
+00 1
+.names n76 n84 n85
+00 1
+.names n77 n81 n86
+00 1
+.names n77 n81 n87
+11 1
+.names n86 n87 n88
+00 1
+.names n76 n88 n89
+10 1
+.names n85 n89 n90
+00 1
+.names mult_a_1 mult_b_3 n91
+11 1
+.names n63 n64 n92
+01 1
+.names n91 n92 n93
+11 1
+.names n91 n92 n94
+00 1
+.names n93 n94 n95
+00 1
+.names n90 n95 n96
+00 1
+.names n91 n92 n97
+01 1
+.names n91 n92 n98
+10 1
+.names n97 n98 n99
+00 1
+.names n90 n99 n100
+10 1
+.names n96 n100 mult_z_4
+00 1
+.names mult_a_3 mult_b_2 n102
+11 1
+.names n77 n86 n103
+00 1
+.names n76 n103 n104
+00 1
+.names n76 n82 n105
+11 1
+.names n104 n105 n106
+00 1
+.names n102 n106 n107
+10 1
+.names n102 n106 n108
+01 1
+.names n107 n108 n109
+00 1
+.names n73 n109 n110
+10 1
+.names n102 n106 n111
+00 1
+.names n102 n106 n112
+11 1
+.names n111 n112 n113
+00 1
+.names n73 n113 n114
+00 1
+.names n110 n114 n115
+00 1
+.names mult_a_2 mult_b_3 n116
+11 1
+.names n91 n97 n117
+00 1
+.names n90 n117 n118
+00 1
+.names n90 n93 n119
+11 1
+.names n118 n119 n120
+00 1
+.names n116 n120 n121
+10 1
+.names n116 n120 n122
+01 1
+.names n121 n122 n123
+00 1
+.names n115 n123 n124
+00 1
+.names n116 n120 n125
+00 1
+.names n116 n120 n126
+11 1
+.names n125 n126 n127
+00 1
+.names n115 n127 n128
+10 1
+.names n124 n128 mult_z_5
+00 1
+.names n102 n111 n130
+00 1
+.names n73 n130 n131
+10 1
+.names n73 n107 n132
+01 1
+.names n131 n132 n133
+00 1
+.names mult_a_3 mult_b_3 n134
+11 1
+.names n116 n125 n135
+00 1
+.names n115 n135 n136
+00 1
+.names n115 n121 n137
+11 1
+.names n136 n137 n138
+00 1
+.names n134 n138 n139
+10 1
+.names n134 n138 n140
+01 1
+.names n139 n140 n141
+00 1
+.names n133 n141 n142
+00 1
+.names n134 n138 n143
+00 1
+.names n134 n138 n144
+11 1
+.names n143 n144 n145
+00 1
+.names n133 n145 n146
+10 1
+.names n142 n146 mult_z_6
+00 1
+.names n134 n143 n148
+00 1
+.names n133 n148 n149
+00 1
+.names n133 n139 n150
+11 1
+.names n149 n150 mult_z_7
+00 1
+.end

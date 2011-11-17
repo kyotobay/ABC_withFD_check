@@ -1,0 +1,8 @@
+.model test
+.inputs v3 v6 j u78 
+.outputs v13.15
+.names v3 v6 j u78 v13.15
+1--0 1
+-1-1 1
+0-11 1
+.end

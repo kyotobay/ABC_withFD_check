@@ -1,0 +1,11 @@
+// Benchmark "dsd" written by ABC on Fri Aug  5 15:19:40 2011
+
+module dsd ( 
+    a, b,
+    F  );
+  input  a, b;
+  output F;
+  assign F = a & b;
+endmodule
+
+

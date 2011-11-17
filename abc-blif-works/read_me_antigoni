@@ -1,0 +1,31 @@
+ 17.11.2011
+ ------------------------------------------------------------------------
+ This version is the last one, verified to be ok (not really tested for functionallity bugs, as far as the produced blif file is concerned- but it is being produced).
+
+The updates are that now in the "strash" command there is nothing done 
+by me. We just know that after "strash" the circuit is already an AIG.
+
+With the "check_fd" command, the truth tables of the outputs are created, 
+the corresponding table.txt files and my_in.txt files are created and they
+are feeded one by one in the c++, FD code.
+
+The FD code returns an array of its results in "fd_result".
+
+Then there is this loop where each time, the output with the smallest
+dependency set, is being ignored and the rest (input files) are refeeded
+to the FD code and finally, when there is no dependency left
+among the outputs that rest, we stop.
+
+At this point the array fd_result is something like:
+
+-1 * -1 *
+
+Then the .blif file is created by leaving untouched the -1 outputs and
+replacing the * ones by their dependencies.
+
+User case scenario:
+read_verilog test_inputs/simple.v
+strash
+check_fd
+
+Verify your after_fd.blif file that is created.

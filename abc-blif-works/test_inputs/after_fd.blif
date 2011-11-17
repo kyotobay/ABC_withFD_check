@@ -1,0 +1,20 @@
+.model after_fd
+.inputs a b c
+.outputs E F G H
+.names a b c E  // ordinary case
+010 1
+011 1
+100 1
+101 1
+.names a b c F 
+101 1
+111 1
+.names E H G
+01 1
+10 1
+.names a b c H
+000 1
+001 1
+100 1
+101 1
+.end

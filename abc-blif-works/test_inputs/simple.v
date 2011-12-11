@@ -2,7 +2,7 @@
 module ANDOR (a, b, c, d, E, F, G, H, I, J, K, L, M, N);
 	input a, b, c, d;
 	output E, F, G, H, I, J, K, L, M, N;
-  assign E = a ^ b;
+  assign E = a ^ c;
   assign F = a & b;
   assign G = ~ a;
   assign H = ~ b;

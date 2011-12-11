@@ -390,7 +390,7 @@ static int Abc_CommandAbc9Test               ( Abc_Frame_t * pAbc, int argc, cha
 
 static int Abc_CommandAbcTestNew             ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandFD             ( Abc_Frame_t * pAbc, int argc, char ** argv );
-void Abc_VarAttribution(Abc_Obj_t *pNode, int nbVars, Abc_Ntk_t *pNtkRes, int count );
+
 extern int Abc_CommandAbcLivenessToSafety    ( Abc_Frame_t * pAbc, int argc, char ** argv );
 extern int Abc_CommandAbcLivenessToSafetySim ( Abc_Frame_t * pAbc, int argc, char ** argv );
 extern int Abc_CommandAbcLivenessToSafetyWithLTL( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -2873,14 +2873,14 @@ bool out_dist(int c, int i, int f, int n)
     int res;
     if(c > i)
     {
-        if((c - 1) - i > f)
+        if(c - i > f)
             res = 0;
         else
             res = 1;
     }
     else if(c < i)
     {
-        if((n + c + 1) - i > f)
+        if(n + c - i > f)
             res = 0;
         else
             res = 1;
@@ -2908,7 +2908,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
     Abc_Obj_t * pObj, *pObjIn;
 	FILE *f;
     char *tmp;
-	int i, c, j, k, cin, h;
+	int i, c, j, k, cin;
 	bool flag = 0;
 	int *fd_result;
 	int *to_delete;
@@ -2922,7 +2922,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 	bool go_on = 1;
 	int min_index, min_value;
     int *a_s_v;
-    int l_t_a;
+    bool l_t_a;
     pNtkRes = Abc_FrameReadNtk(pAbc);
 
 	Abc_NtkForEachPo(pNtkRes, pObj, c)
@@ -2932,7 +2932,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 		Abc_VarAttribution(pObj, nbVars, pNtkRes, count);
 		count++;
 	}
-    a_s_v = malloc(bin_pow(nbVars) * sizeof(int));
+    a_s_v = malloc(sizeof(bin_pow(nbVars)));
 
 	numOuts = Abc_NtkPoNum( pNtkRes ); 
 	fd_result = malloc(numOuts * sizeof(int));
@@ -2948,7 +2948,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 		count = 0;
 		go_on = 0;
 		numBis = numOuts - sumList(to_delete, numOuts);
-		printf("numBis : %d\n", numBis);
+		printf("numBis : %d", numBis);
 		Abc_NtkForEachPo(pNtkRes, pObj, c)
 		{
 			sprintf(num_out_o, "%d", count);
@@ -2987,7 +2987,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 					fichier = fopen(filename, "r");
 					while(fgets(myLine, 32, fichier) != NULL)
 					{
-						fprintf(fichier_o, "%s", myLine);
+						fprintf(fichier_o, myLine);
 					}
 					fprintf(fichier_o, "\n");
 					fclose(fichier);
@@ -3016,7 +3016,7 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 			if(!to_delete[i])
 				printf("%d\t", fd_result[i]);
 			else
-				printf("*\t %d\t", fd_result[i]);
+				printf("*\t");
 		printf("\n");
 
 		for(i = 0; i < numOuts; i++)
@@ -3070,25 +3070,15 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
 
     Abc_NtkForEachPo(pNtkRes, pObj, c)
     {
-        //to_delete[c] = 1 for all outputs * in results
         if(to_delete[c])
         {
-            memset(a_s_v, 0, (bin_pow(nbVars)) * sizeof(int));
-           //debug printf("fd_result[%d] = %d\n", c, fd_result[c]);
+            printf("fd_result[%d] = %d\n", c, fd_result[c]);
             sprintf(num_out, "%d", c);
             strcpy(filename, "table");
             strcat(filename, num_out);
             strcat(filename, ".txt");
             fichier = fopen(filename, "r");
-            if(fichier == NULL)
-            {
-                printf("Error opening file %s\n", filename);
-                exit(1);
-            }
-            else
-            {
-                printf("Opened file %s successfully\n", filename);
-            }
+            line_num = 0;
             fprintf(blif, ".names ");
             Abc_NtkForEachPo(pNtkRes, pObjIn, cin)
             {
@@ -3098,13 +3088,8 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
                 }
             }
             fprintf(blif, "%s\n", Abc_ObjName(pObj));
-           // for(h = 0; h <= line_num; h++)
-            //{
-            fgets(myLine, 32, fichier);
-            line_num = 0;
-            do
+            while(fgets(myLine, 32, fichier) != NULL)
             {
-                line_num++;
                 strcpy(buf, "");
                 Abc_NtkForEachPo(pNtkRes, pObjIn, cin)
                 {
@@ -3128,39 +3113,29 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
                         {
                             fgets(myOLine, 32, fichier_o);
                         }
-                        //fgets(myOLine, 2, fichier_o);
+                        fgets(myOLine, 2, fichier_o);
                         //t_buf[0] = myOLine[0];
                         //t_buf[1] = "\0";
-                        printf("buf before: %s\n", buf);
                         printf("read line %s", myOLine);
-                        myOLine[1] = '\0';
                         strcat(buf, myOLine);
-                        printf("buf after: %s\n", buf);
                         fclose(fichier_o);
                     }
                 }
                 l_t_a = 1;
                 for(i = 0; i < line_num; i++)
                 {
-                    //printf("buf: %s\n", buf);
-                    //printf("stroll: %d\n", strtol(buf, &tmp, 2));
                     if(a_s_v[i] == strtol(buf, &tmp, 2))
-                    {
                         l_t_a = 0;
-                        //printf("a_s_v[i]: %d\n", a_s_v[i]);
-                    }
                 }
                 if(l_t_a)
                 {
+                    printf("%s\n", buf);
                     a_s_v[line_num] = strtol(buf, &tmp, 2);
                     if(myLine[0] == '1')
-                    {
                         fprintf(blif, "%s 1\n", buf);
-                    }
                 }
+                line_num++;
             }
-            while(fgets(myLine, 32, fichier) != NULL);
-            // }
             fclose(fichier);
         }
         else
@@ -3190,19 +3165,19 @@ int Abc_CommandFD( Abc_Frame_t * pAbc, int argc, char ** argv )
     }
     fprintf(blif, ".end");
     fclose(blif);
-    return 0;
+
 }
 /**Function*************************************************************
 
   Synopsis    []
 
   Description []
-
+               
   SideEffects []
 
   SeeAlso     []
 
- ***********************************************************************/
+***********************************************************************/
 int Abc_CommandBalance( Abc_Frame_t * pAbc, int argc, char ** argv )
 {
     Abc_Ntk_t * pNtk, * pNtkRes, * pNtkTemp;
